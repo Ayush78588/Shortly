@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f0db4f;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 340px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #116e26;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .short-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #116e26;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .short-link a {
+            color: #116e26;
+            text-decoration: none;
+        }
+
+        .short-link a:hover {
+            text-decoration: underline;
+        }
+
+        #warning{
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/track">Track</a>
+        <a href="/about">About Us</a>
+        <% if(user){ %>
+            <a href="/profile">Profile</a>
+            <a href="/logout">LogOut</a>
+            <% }else{ %>
+                <a href="/login">🔐Login</a>
+                <% } %>
+    </nav>
+
+    <h1>Shorten Your URL</h1>
+
+    <form action="/shorturl" method="POST">
+        <input type="text" name="url" placeholder="Enter your URL here" required>
+        <button type="submit">Shorten</button>
+        <div class="short-link">
+            <% if(user){ %>
+
+                Short URL <br>
+                <a id="short-url" href="http://localhost:4000/<%= sid %>"
+                    target="_blank">http://localhost:4000/<%= sid %></a>
+                <i id="copy-icon" class="fa-solid fa-copy"></i> <span id="msg"></span> <br>
+
+                <% }else{ %>
+                    <a href="/login" id="warning">Please Login First</a>
+                    <% } %>
+        </div>
+    </form>
+    <script src="https://kit.fontawesome.com/076498dd56.js" crossorigin="anonymous"></script>
+    <script>
+        const copyIcon = document.getElementById("copy-icon");
+        const msg = document.getElementById("msg");
+        const shortUrl = document.getElementById("short-url").innerText;
+
+        copyIcon.addEventListener("click", () => {
+            navigator.clipboard.writeText(shortUrl).then(() => {
+                msg.innerText = 'copied';
+                setTimeout(function () {
+                    msg.innerText = '';
+                }, 1000);
+            }).catch((err) => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Account Verified</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f0db4f;
+        }
+
+        .success-card {
+            background: #ffffff;
+            color: #333;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .success-card h2 {
+            font-size: 24px;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        .success-card p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .success-card a {
+            margin-top: 10px;
+            display: inline-block;
+            background-color: #116e26;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .success-card a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+
+    <div class="success-card">
+        <h2>🎉 Your Account is Verified!</h2>
+        <p>You can now log in and start using your account.</p>
+        <a href="/login">Login to Continue</a>
+    </div>
+
+</body>
+
+</html>

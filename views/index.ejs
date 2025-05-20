@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortener</title>
+    <style>
+        /* ─── Original styles ─────────────────────────────────────────────── */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f0db4f;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 340px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #116e26;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* ─── New banner styles ───────────────────────────────────────────── */
+        .banner {
+            margin-top: 10px;       /* distance from nav */
+            margin-bottom: 40px;
+            padding: 20px 32px;
+            max-width: 500px;
+            text-align: center;
+
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .banner a {
+            color: #f02d0b;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/track">Track</a>
+        <a href="/about">About Us</a>
+        <% if (user) { %>
+            <a href="/profile">Profile</a>
+            <a href="/logout">LogOut</a>
+        <% } else { %>
+            <a href="/login">🔐Login</a>
+        <% } %>
+    </nav>
+
+    <!-- ─── Modern welcome / warning banner ─────────────────────────────── -->
+    <% if (user) { %>
+        <div class="banner">
+            👋 Welcome back, <strong><%= user.name.split(' ').filter(function(ele){return ele!= ''})[0] || 'user' %></strong>! Ready to shorten some links?
+        </div>
+    <% } else { %>
+        <div class="banner">
+            🚫 Please <a href="/login">log&nbsp;in</a> to use Shortly — guests can look around but can’t create short links.
+        </div>
+    <% } %>
+
+    <h1>Shorten Your URL</h1>
+
+    <form action="/shorturl" method="POST">
+        <input type="text" name="url" placeholder="Enter your URL here" required>
+        <button type="submit">Shorten</button>
+    </form>
+
+</body>
+
+</html>

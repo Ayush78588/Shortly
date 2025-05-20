@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - Shortly</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: Arial, sans-serif;
+            color: #f2f2f2;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            min-height: 100vh;
+        }
+        .box {
+            background-color: #032c31;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .head {
+            font-size: 28px;
+            color: #00bcd4;
+            margin-bottom: 20px;
+        }
+        .text {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #ddd;
+        }
+        .text ul {
+            padding-left: 20px;
+        }
+        .text li {
+            margin-bottom: 10px;
+        }
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f0db4f;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/track">Track</a>
+        <% if(user){ %>
+            <a href="/profile">Profile</a>
+            <a href="/logout">LogOut</a>
+            <% }else{ %>
+                <a href="/login">🔐Login</a>
+                <% } %>
+    </nav>
+    <div class="main">
+        <div class="box">
+            <h1 class="head">📄 About Us</h1>
+
+            <p class="text">
+                Welcome to <strong>Shortly</strong>, your reliable and privacy-friendly URL shortening service!
+            </p>
+
+            <h2 class="head">🌐 What We Do</h2>
+            <div class="text">
+                <ul>
+                    <li><strong>Quick URL shortening</strong>: Convert long, messy links into clean, short ones.</li>
+                    <li><strong>Smart redirection</strong>: Automatically redirects to the original URL with or without <code>http/https</code>.</li>
+                    <li><strong>Tracking</strong>: View how many times your link has been visited, along with timestamps and dates.</li>
+                </ul>
+            </div>
+
+            <h2 class="head">🔒 Privacy First</h2>
+            <p class="text">
+                We don’t track personal data. Your URLs and tracking stats are stored securely and are only accessible via the generated short link.
+            </p>
+
+            <h2 class="head">💡 Why Use Us?</h2>
+            <div class="text">
+                <ul>
+                    <li>Lightweight and fast</li>
+                    <li>User-friendly interface</li>
+                    <li>Basic analytics without the bloat</li>
+                </ul>
+            </div>
+
+            <p class="text">
+                This project was built using:<br>
+                <strong>Node.js & Express</strong> for the server<br>
+                <strong>MongoDB</strong> for storing URLs and visit logs<br>
+                <strong>EJS</strong> for templating
+            </p>
+
+        </div>
+    </div>
+</body>
+</html>

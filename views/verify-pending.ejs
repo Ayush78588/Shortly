@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Verification Pending</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f0db4f;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 360px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2a5298;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #444;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .expired-text {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        form button {
+            background-color: #116e26;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+
+    <div class="container">
+        <h1>Verification Pending</h1>
+        <p>A link has already been sent to your email address. Please verify your account to continue.</p>
+
+        <div class="expired-text">Link expired?</div>
+        <form action="/resend-link/<%= token%>">
+            <button type="submit">Resend Verification Link</button>
+        </form>
+    </div>
+
+</body>
+</html>
