@@ -120,8 +120,9 @@ async function handleRedirectShortUrl(req, res) {
             }
         }
         let dt = new Date();
-        let fullDate = `${format(dt.getDate())}-${format(dt.getMonth() + 1)}-${dt.getFullYear()}`;
-        let time = `${format(dt.getHours()+5)}:${format(dt.getMinutes()+30)}:${format(dt.getSeconds())}`;
+        let ndt = new Date(dt.getTime() + 330*60*1000);
+        let fullDate = `${format(ndt.getDate())}-${format(ndt.getMonth() + 1)}-${ndt.getFullYear()}`;
+        let time = `${format(ndt.getHours())}:${format(ndt.getMinutes())}:${format(ndt.getSeconds())}`;
 
         let url = await urlModel.findOne({ shortId: sid });
         if (!url) {
