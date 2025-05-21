@@ -127,8 +127,8 @@
             <% if(user){ %>
 
                 Short URL <br>
-                <a id="short-url" href="http://localhost:4000/<%= sid %>"
-                    target="_blank">http://localhost:4000/<%= sid %></a>
+                <a id="short-url" href="<%=process.env.SHORTLY_DOMAIN %>/<%= sid %>"
+                    target="_blank"><%=process.env.SHORTLY_DOMAIN %>/<%= sid %></a>
                 <i id="copy-icon" class="fa-solid fa-copy"></i> <span id="msg"></span> <br>
 
                 <% }else{ %>
