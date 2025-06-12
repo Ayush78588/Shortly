@@ -108,12 +108,9 @@
     <nav>
         <a href="/">Home</a>
         <a href="/about">About Us</a>
-        <% if(user){ %>
-            <a href="/profile">Profile</a>
-            <a href="/logout">LogOut</a>
-            <% }else{ %>
-                <a href="/login">🔐Login</a>
-                <% } %>
+        <a href="/profile">Profile</a>
+        <a href="/logout">LogOut</a>
+
     </nav>
 
     <h1>Track Your Short URL</h1>
@@ -122,29 +119,26 @@
         <input type="text" name="url" placeholder="Enter your Short URL here" required>
         <button type="submit">Track</button>
         <div>
-            <% if(user){ %>
-                <% if(found){ %>
-                    <% if(visited===0){ %>
-                        <span class="red">Not Visited Yet!</span>
-                        <% } else{ %>
-                            NumberofVisits: <%= visited%> <br> <br>
-                                <% for(let i=0;i<details.length;i++){ %>
-                                    <div id="details">
-                                        <h4>Visit <%= details[i].visit%>
-                                        </h4>
-                                        time: <%= details[i].time%> <br>
-                                            date: <%= details[i].date%>
-                                    </div>
+            <% if(found){ %>
+                <% if(visited===0){ %>
+                    <span class="red">Not Visited Yet!</span>
+                    <% } else{ %>
+                        NumberofVisits: <%= visited%> <br> <br>
+                            <% for(let i=0;i<details.length;i++){ %>
+                                <div id="details">
+                                    <h4>Visit <%= details[i].visit%>
+                                    </h4>
+                                    time: <%= details[i].time%> <br>
+                                        date: <%= details[i].date%>
+                                </div>
+                                <% } %>
                                     <% } %>
-                                        <% } %>
-                                            <% } else { %>
-                                                <span class="red">
-                                                    <%= str%>
-                                                </span>
-                                                <% } %>
-                                                    <% }else{ %>
-                                                        <a href='/login' class="red">Please Login First</a>
-                                                        <% } %>
+                                        <% } else { %>
+                                            <span class="red">
+                                                <%= str%>
+                                            </span>
+                                            <% } %>
+
 
         </div>
     </form>

@@ -110,12 +110,10 @@
         <a href="/">Home</a>
         <a href="/track">Track</a>
         <a href="/about">About Us</a>
-        <% if(user){ %>
+    
             <a href="/profile">Profile</a>
             <a href="/logout">LogOut</a>
-            <% }else{ %>
-                <a href="/login">🔐Login</a>
-                <% } %>
+           
     </nav>
 
     <h1>Shorten Your URL</h1>
@@ -124,16 +122,10 @@
         <input type="text" name="url" placeholder="Enter your URL here" required>
         <button type="submit">Shorten</button>
         <div class="short-link">
-            <% if(user){ %>
-
                 Short URL <br>
                 <a id="short-url" href="<%=process.env.SHORTLY_DOMAIN %>/<%= sid %>"
                     target="_blank"><%=process.env.SHORTLY_DOMAIN %>/<%= sid %></a>
                 <i id="copy-icon" class="fa-solid fa-copy"></i> <span id="msg"></span> <br>
-
-                <% }else{ %>
-                    <a href="/login" id="warning">Please Login First</a>
-                    <% } %>
         </div>
     </form>
     <script src="https://kit.fontawesome.com/076498dd56.js" crossorigin="anonymous"></script>

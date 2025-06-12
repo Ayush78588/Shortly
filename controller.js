@@ -83,8 +83,6 @@ async function handleLogin(req, res) {
 
 async function handleGenerateShortURL(req, res) {
     try {
-        let user = await isLoggedIn(req.cookies.token);
-        if (user) {
             let sid = shortId.generate();
             await urlModel.create({
                 shortId: sid,
@@ -93,10 +91,8 @@ async function handleGenerateShortURL(req, res) {
                 details: []
             });
 
-            res.render('shorturl', { sid, user });
-        } else {
-            res.render('shorturl', { user })
-        }
+            res.render('shorturl', { sid});
+        
     } catch (err) {
         res.send(err.message);
     }
@@ -146,16 +142,9 @@ async function handleRedirectShortUrl(req, res) {
 
 async function handleShowTrackPage(req, res) {
     try {
-        let token = req.cookies.token;
-        if (token) {
-            let data = jwt.verify(token, JWT_SECRET);
-            let user = await userModel.findOne({ email: data.email });
+        let user = await getUser(req.cookies.token);
             res.render('track', { user });
-        }
-        else {
-
-            res.render('track', { user: null });
-        }
+        
     } catch (err) {
         res.send(err.message);
     }
@@ -163,7 +152,6 @@ async function handleShowTrackPage(req, res) {
 
 async function handleTrackingDetails(req, res) {
     try {
-        let user = await isLoggedIn(req.cookies.token);
         let surl = req.body.url;
         surl = surl.split('/').filter(function (ele) {
             return ele != '';
@@ -171,10 +159,10 @@ async function handleTrackingDetails(req, res) {
         let sid = surl[surl.length - 1];
         let url = await urlModel.findOne({ shortId: sid });
         if (!url) {
-            return res.render('trackingDetails', { str: 'Invalid Short URL', found: false, user });
+            return res.render('trackingDetails', { str: 'Invalid Short URL', found: false});
         }
 
-        res.render('trackingDetails', { visited: url.visited, details: url.details, found: true, user });
+        res.render('trackingDetails', { visited: url.visited, details: url.details, found: true});
     } catch (err) {
         res.send(err.message);
     }
@@ -182,7 +170,7 @@ async function handleTrackingDetails(req, res) {
 
 async function handleAboutPage(req, res) {
     try {
-        let user = await isLoggedIn(req.cookies.token);
+        let user = await getUser(req.cookies.token);
         res.render('about', { user });
     } catch (err) {
         res.send(err.message);
@@ -191,7 +179,7 @@ async function handleAboutPage(req, res) {
 
 async function handleHomePage(req, res) {
     try {
-        let user = await isLoggedIn(req.cookies.token);
+        let user = await getUser(req.cookies.token);
         res.render('index', { user });
     } catch (err) {
         res.send(err.message);
@@ -199,7 +187,7 @@ async function handleHomePage(req, res) {
 
 }
 
-async function isLoggedIn(token) {
+async function getUser(token) {
     if (token) {
         let data = jwt.verify(token, JWT_SECRET);
         let user = await userModel.findOne({ email: data.email });
@@ -212,9 +200,7 @@ async function isLoggedIn(token) {
 
 async function handleProfilePage(req, res) {
     try {
-        let data = jwt.verify(req.cookies.token, JWT_SECRET);
-        let user = await userModel.findOne({ email: data.email })
-        res.render('profile', { user })
+        res.render('profile', { user: req.user })
     } catch (err) {
         res.send(err.message);
     }
@@ -290,9 +276,7 @@ async function handleResetPassword(req, res) {
 
 async function handleEditProfile(req, res) {
     try {
-        let data = jwt.verify(req.cookies.token, JWT_SECRET);
-        let user = await userModel.findOne({ email: data.email });
-        res.render('edit-profile', { user });
+        res.render('edit-profile', { user: req.user });
     } catch (err) {
         res.send(err.message);
     }
@@ -300,9 +284,8 @@ async function handleEditProfile(req, res) {
 
 async function handleSaveProfileDetails(req, res) {
     try {
-        let data = jwt.verify(req.cookies.token, JWT_SECRET);
         let { name, age } = req.body;
-        await userModel.findOneAndUpdate({ email: data.email }, { name, age });
+        await userModel.findOneAndUpdate({ email: req.user.email }, { name, age });
         res.redirect(`/profile`);
     } catch (err) {
         res.send(err.message);
