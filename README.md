@@ -13,7 +13,7 @@ Shortly is a full-stack URL shortening web application where users can input lon
 - Track number of visits per short URL
 - Edit user profile details (e.g., name, age)
 
-  ##  Tech Stack
+##  Tech Stack
 
 - **Backend**: Node.js, Express.js
 - **Frontend**: EJS templates
