@@ -8,3 +8,5 @@ Shortly is a full-stack URL shortening web application where users can input lon
 - Redirects short URL to original URL
 - Stores links in MongoDB
 - Responsive user interface
+- Track number of visits per short URL
+- Edit user profile details (e.g., name, age)
