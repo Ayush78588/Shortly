@@ -1,0 +1,10 @@
+# Shortly – URL Shortener 
+
+Shortly is a full-stack URL shortening web application where users can input long URLs and get a shortened version. Built using Node.js, Express, and MongoDB.
+
+##  Features
+
+- Shortens long URLs into a simple numeric path
+- Redirects short URL to original URL
+- Stores links in MongoDB
+- Responsive user interface
