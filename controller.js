@@ -43,8 +43,6 @@ async function handleRegister(req, res) {
 
 async function handleAccountVerification(req, res) {
     try {
-         console.log(1);
-        
         let token = req.params.token;
         console.log(token);
         let data = jwt.verify(token, JWT_SECRET);
