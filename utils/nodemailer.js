@@ -1,5 +1,7 @@
 let nodemailer = require('nodemailer');
 
+let shortlyDomain = process.env.SHORTLY_DOMAIN;
+
 async function sendMail(event, data) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -11,11 +13,11 @@ async function sendMail(event, data) {
 
     let subject, html;
     if (event === 'signup-verification') {
-        subject = `Verify Your Account ${data.name}`,
-            html = `Welcome to Shortly, ${data.name}! <br> <a href="http://localhost:4000/verifyemail/${data.token}">Click here to verify</a>`
+        subject = `Verify Your Account ${data.name}`;
+            html = `Welcome to Shortly, ${data.name}! <br> <a href="${shortlyDomain}/verifyemail/${data.token}">Click here to verify</a>`
     }else if(event === 'reset-password'){
         subject = 'Reset your password';
-        html = `Welcome to Shortly, ${data.name}! <br> <a href="http://localhost:4000/reset-password/${data.token}">Click here</a> to reset your pasword.`
+        html = `Welcome to Shortly, ${data.name}! <br> <a href="${shortlyDomain}/reset-password/${data.token}">Click here</a> to reset your password.`
     }
 
     let obj = {

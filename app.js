@@ -1,5 +1,5 @@
 let obj = require('dotenv').config();
-console.log(process.env.PORT, process.env.MONGODB_URL);
+console.log(process.env.PORT || 4000);
 const express = require('express');
 require('./config/mongoose');
 const cp = require('cookie-parser');
