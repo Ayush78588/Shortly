@@ -43,6 +43,8 @@ async function handleRegister(req, res) {
 
 async function handleAccountVerification(req, res) {
     try {
+         console.log(1);
+        
         let token = req.params.token;
         console.log(token);
         let data = jwt.verify(token, JWT_SECRET);
@@ -51,6 +53,7 @@ async function handleAccountVerification(req, res) {
         res.render('confirmation-page');
     }
     catch (err) {
+        console.log(err.message);
         res.send('Link expired! <br> Please Login to get verification link again.');
     }
 
